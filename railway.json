@@ -1,0 +1,7 @@
+{
+    "build": {
+      "env": "python",
+      "root": "flask-server"
+    },
+    "start": "python server.py"
+  }  

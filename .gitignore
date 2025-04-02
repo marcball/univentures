@@ -12,6 +12,7 @@ flask-server/*.pyc
 flask-server/instance/
 *.pyc
 __pycache__/
+flask-server/.env
 
 # .env
 .env

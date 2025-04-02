@@ -2,13 +2,9 @@
 
 **UniVentures** is a full-stack web application that helps college students discover and share local experiences tied to their university. By integrating real-time data from the Google Places API with community-submitted content, the platform allows users to explore what’s around campus, rate and review locations, and contribute their own adventures.
 
----
-
 ## Live Demo
 
 Visit the deployed site: COMING SOON
-
----
 
 ## Features
 
@@ -33,8 +29,6 @@ Visit the deployed site: COMING SOON
 - **Contact Form**  
   Includes a contact page for user inquiries, routed to the UniVentures support email.
 
----
-
 ## Screenshots
 
 *WORK IN PROGRESS*
@@ -50,8 +44,6 @@ Submit an Adventure:
 
 + a few more.
 
----
-
 ## Tech Stack
 
 **Frontend**
@@ -65,8 +57,6 @@ Submit an Adventure:
 - Google Places API
 - OpenStreetMap API (Nominatim)
 
----
-
 ## Database Overview
 
 UniVentures uses two MySQL databases:
@@ -75,8 +65,6 @@ UniVentures uses two MySQL databases:
 - `schools`: stores university listings, locations, ratings, and reviews
 
 Each user is associated with a school via email domain. University geolocation data is retrieved using OpenStreetMap, and all adventures (public or submitted) are connected to a specific campus.
-
----
 
 ## Environment Variables
 
@@ -99,19 +87,13 @@ MAIL_PASSWORD=your_email_app_password
 GOOGLE_API_KEY=your_google_maps_api_key
 ```
 
----
-
 ## Hosting Notes
 
 This project can be deployed using any combination of static frontend hosting (such as Vercel), a Python-compatible backend service (such as Railway), and a cloud-hosted MySQL provider. Before deployment, update all environment variables with production credentials.
 
----
-
 ## Project Info
 
 This was a final project developed for a Missouri State Software Engineering course in collaboration with two other team members. Their names have been omitted here for anonymity.
-
----
 
 ## License
 
