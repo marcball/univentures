@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.bg-white {
+    background-color: #ffffff;
+  }
+  .text-black {
+    color: #000000;
+  }
+  
+  .dark .bg-gray-800 {
+    background-color: #1a202c; 
+  }
+  .dark .text-white {
+    color: #ffffff;
+  }
+
+  /* Adjust grid layout based on screen size */
+@media (max-width: 600px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 1024px) {
+  .card-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .card-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

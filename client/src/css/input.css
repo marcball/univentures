@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+div.darkTable {
+  font-family: Verdana, Geneva, sans-serif;
+  border: 3px solid #1D3E76;
+  background-color: #4A4A4A;
+  width: 100%;
+  height: 200px;
+  text-align: center;
+  border-collapse: collapse;
+}
+.divTable.darkTable .divTableCell, .divTable.darkTable .divTableHead {
+  border: 1px solid #4A4A4A;
+  padding: 3px 2px;
+}
+.divTable.darkTable .divTableBody .divTableCell {
+  font-size: 10px;
+  color: #E6E6E6;
+}
+.divTable.darkTable .divTableRow:nth-child(even) {
+  background: #888888;
+}
+.divTable.darkTable .divTableHeading {
+  background: #CDCDCD;
+  border-bottom: 1px solid #000000;
+}
+.divTable.darkTable .divTableHeading .divTableHead {
+  font-size: 27px;
+  font-weight: bold;
+  color: #193769;
+  text-align: center;
+  border-left: 2px solid #193769;
+}
+.divTable.darkTable .divTableHeading .divTableHead:first-child {
+  border-left: none;
+}
+
+.darkTable .tableFootStyle {
+  font-size: 12px;
+}
+
+.loader {
+  border: 16px solid #ffffff; 
+  border-top: 16px solid #101c26;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -60px;
+  margin-left: -60px;
+}

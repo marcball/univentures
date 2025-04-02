@@ -1,0 +1,28 @@
+# Node (React frontend)
+node_modules/
+client/node_modules/
+client/build/
+client/.next/
+client/.cache/
+client/package-lock.json
+
+# Python (Flask backend)
+flask-server/__pycache__/
+flask-server/*.pyc
+flask-server/instance/
+*.pyc
+__pycache__/
+
+# .env
+.env
+*.env
+.env.*  # for staging, prod, etc.
+
+# OS & Editor junk
+.DS_Store
+.vscode/
+*.log
+
+# VENVS
+venv/
+env/

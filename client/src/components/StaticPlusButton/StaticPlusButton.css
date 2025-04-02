@@ -1,0 +1,29 @@
+.static-plus-button {
+    position: fixed;
+    bottom: 20px; 
+    right: 20px; 
+    width: 60px; 
+    height: 60px; 
+    background-color: white;
+    color: gray; /* Gray + */
+    border-radius: 50%; /* circular  */
+    border: 2px solid lightgray;
+    display: flex; /* center */
+    justify-content: center; 
+    align-items: center; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /*  shadow */
+    cursor: pointer; /* hover pointer */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* smooth hover effect */
+  }
+  
+  .static-plus-button:hover {
+    background-color: #f0f0f0; /* slightly darker white on hover */
+    transform: scale(1.1); /* zoom effect */
+  }
+  
+  .icon-plus {
+    width: 45px;
+    height: 45px;
+    color: gray; 
+  }
+  
