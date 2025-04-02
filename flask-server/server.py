@@ -890,7 +890,7 @@ def rate_activity():
         if connection.is_connected():
             cursor.close()
             connection.close()
-    
+
 
 if __name__ == "__main__":
-    app.run(debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=os.getenv("FLASK_DEBUG", "false").lower() == "true")
