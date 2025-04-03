@@ -2,7 +2,6 @@
   "name": "client",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://univentures.up.railway.app",
   "dependencies": {
     "@heroicons/react": "^1.0.6",
     "@svgr/plugin-svgo": "^8.1.0",

@@ -182,7 +182,7 @@ const SchoolDetail = () => {
 	useEffect(() => {
 		const fetchSchoolDetails = async () => {
 			try {
-				const response = await axios.get(`/api/schools/${schoolID}`);
+				const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/schools/${schoolID}`);
 				setSchool(response.data);
 
 				if (response?.data?.domain) {

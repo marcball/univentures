@@ -40,7 +40,7 @@ const SearchBar = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.get(`/api/schools?query=${query}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/schools?query=${query}`);
             setSchools(response.data);
         } catch (error) {
             console.error('Error fetching schools:', error);
