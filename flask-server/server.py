@@ -461,7 +461,7 @@ def purge_and_refill():
     
     #get api data
     url = "http://universities.hipolabs.com/search?country=united%20states"
-    response = requests.get(url)
+    response = requests.get(url, stream=True, timeout=10)
     data = response.json()
 
     #iterate data
