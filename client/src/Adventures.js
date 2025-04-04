@@ -14,17 +14,18 @@ const Adventures = () => {
     const fetchAdventures = async () => {
         try {
           setLoading(true);
-      
-          const response = await fetch(`/api/nearby/${schoolID}/activities`);
+
+          console.log("Fetching from:", `${process.env.REACT_APP_API_URL}/api/nearby/${schoolID}/activities`);
+          const response = await fetch(`${process.env.REACT_APP_API_URL}/api/nearby/${schoolID}/activities`);
           const text = await response.text(); 
-          console.log("🧪 Raw response from Google API route:", text); 
+          console.log("Raw response from Google API route:", text); 
       
           // Try parsing
           let data;
           try {
             data = JSON.parse(text);
           } catch (parseError) {
-            console.error("❌ Failed to parse response as JSON", parseError);
+            console.error("Failed to parse response as JSON", parseError);
             setError("Received non-JSON response from server.");
             return;
           }
@@ -32,7 +33,7 @@ const Adventures = () => {
           setAdventures(data);
           setError(null);
         } catch (err) {
-          console.error("❌ fetchAdventures error:", err);
+          console.error("fetchAdventures error:", err);
           setError(err.message);
           setAdventures([]);
         } finally {
