@@ -616,18 +616,11 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 # Debug to make sure it's working.
 print("[DEBUG] GOOGLE_API_KEY loaded:", bool(GOOGLE_API_KEY))
 
-def get_db_connection():
-    return mysql.connector.connect(
-        host=os.getenv("DB_HOST", "localhost"),
-        user=os.getenv("DB_USER", "root"),
-        password=os.getenv("DB_PASSWORD"),
-        database=os.getenv("DB_SCHOOLS", "schools")
-    )
 
 # Fetch university details
 @app.route('/api/university/<int:id>', methods=['GET'])
 def get_university(id):
-    conn = get_db_connection()
+    conn = get_mysql_connection_from_url()
     cursor = conn.cursor(dictionary=True)
     cursor.execute("SELECT * FROM names WHERE id = %s", (id,))
     university = cursor.fetchone()
@@ -639,7 +632,7 @@ def get_university(id):
 @app.route('/api/nearby/<int:id>/<string:category>', methods=['GET'])
 @app.route('/api/nearby/<int:id>/', methods=['GET'])
 def get_nearby_places(id, category=None):
-    conn = get_db_connection()
+    conn = get_mysql_connection_from_url()
     cursor = conn.cursor(dictionary=True)
     query = "SELECT latitude, longitude FROM names WHERE id = %s"
     cursor.execute(query, (id,))
