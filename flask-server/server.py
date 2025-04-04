@@ -613,6 +613,8 @@ def get_random_location():
 
 # GOOGLE API KEY
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+# Debug to make sure it's working.
+print("[DEBUG] GOOGLE_API_KEY loaded:", bool(GOOGLE_API_KEY))
 
 def get_db_connection():
     return mysql.connector.connect(
@@ -645,9 +647,9 @@ def get_nearby_places(id, category=None):
     cursor.close()
     conn.close()
 
-    if not location:
-        return jsonify({"error": f"Location not found for school: {id}"}), 404
-
+    if not location or not location['latitude'] or not location['longitude']:
+        print(f"[DEBUG] Missing lat/lon for school ID: {id}")
+        return jsonify({"error": f"Missing coordinates for school: {id}"}), 404
 
     latitude = location['latitude']
     longitude = location['longitude']
@@ -677,10 +679,19 @@ def get_nearby_places(id, category=None):
 
     # Call Google Places API
 
-    response = requests.get(url)
+    print("[DEBUG] Google API URL preview:", url.split("&key=")[0])
+    
+    try: 
+        response = requests.get(url)
+        print("[DEBUG] Google API status:", response.status_code)
 
-    if response.status_code != 200:
-        return jsonify({"error": "Failed to fetch nearby places"}), response.status_code
+        if response.status_code != 200:
+            print("[DEBUG] Google API response snippet:", response.text[:250])
+            return jsonify({"error": "Failed to fetch nearby places"}), response.status_code
+
+    except Exception as e:
+        print("[ERROR] Google API call exception:", str(e))
+        return jsonify({"error": "Google API call failing"}), 500
 
     # Process API response
     places = response.json().get("results", [])
