@@ -627,7 +627,7 @@ def get_db_connection():
 def get_university(id):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM names WHERE id = %s", (id))
+    cursor.execute("SELECT * FROM names WHERE id = %s", (id,))
     university = cursor.fetchone()
     cursor.close()
     conn.close()
