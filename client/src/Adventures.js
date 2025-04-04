@@ -12,21 +12,33 @@ const Adventures = () => {
 
   useEffect(() => {
     const fetchAdventures = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`/api/nearby/${schoolID}/activities`);
-        if (!response.ok) throw new Error('Failed to fetch adventures');
-        const data = await response.json();
-
-        setAdventures(data);
-        setError(null);
-      } catch (err) {
-        setError(err.message);
-        setAdventures([]);
-      } finally {
-        setLoading(false);
-      }
-    };
+        try {
+          setLoading(true);
+      
+          const response = await fetch(`/api/nearby/${schoolID}/activities`);
+          const text = await response.text(); 
+          console.log("🧪 Raw response from Google API route:", text); 
+      
+          // Try parsing
+          let data;
+          try {
+            data = JSON.parse(text);
+          } catch (parseError) {
+            console.error("❌ Failed to parse response as JSON", parseError);
+            setError("Received non-JSON response from server.");
+            return;
+          }
+      
+          setAdventures(data);
+          setError(null);
+        } catch (err) {
+          console.error("❌ fetchAdventures error:", err);
+          setError(err.message);
+          setAdventures([]);
+        } finally {
+          setLoading(false);
+        }
+      };
 
     fetchAdventures();
   }, [schoolID]);
