@@ -7,14 +7,32 @@ from SchoolDB import get_schools
 from mysql.connector import Error
 from flask_mail import Mail, Message
 from itsdangerous import URLSafeTimedSerializer
+from urllib.parse import urlparse
 from dotenv import load_dotenv
 import requests
 import random
 import time
 import os
 
+
+
+
+
+
 load_dotenv()
 app = Flask(__name__)
+
+def get_mysql_connection_from_url():
+    db_url = os.getenv("MYSQL_URL")
+    parsed = urlparse(db_url)
+
+    return mysql.connector.connect(
+        host=parsed.hostname,
+        port=parsed.port or 3306,
+        user=parsed.username,
+        password=parsed.password,
+        database=parsed.path.lstrip("/")  # remove leading slash
+    )
 
 # Session & Cookie Configuration
 app.secret_key = os.getenv("SECRET_KEY")
@@ -38,23 +56,13 @@ serializer = URLSafeTimedSerializer(os.getenv("SERIALIZER_SECRET")) #should be i
 # Database connection utilities
 def get_db_connection_users():
     if 'db_connection_users' not in g:
-        g.db_connection_users = mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_USERS", "users")
-        )
+        g.db_connection_users = get_mysql_connection_from_url()
     return g.db_connection_users
 
 # Connection to SCHOOLS database
 def get_db_connection_schools():
     if 'db_connection_schools' not in g:
-        g.db_connection_schools = mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD"),
-            database=os.getenv("DB_SCHOOLS", "schools")
-        )
+        g.db_connection_schools = get_mysql_connection_from_url()
     return g.db_connection_schools
 
 # Close Connection - USERS

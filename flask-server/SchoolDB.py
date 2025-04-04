@@ -2,19 +2,27 @@ import os
 import mysql.connector
 from mysql.connector import Error
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 
 load_dotenv()
+
+
+def get_mysql_connection_from_url():
+    db_url = os.getenv("MYSQL_URL")
+    parsed = urlparse(db_url)
+
+    return mysql.connector.connect(
+        host=parsed.hostname,
+        port=parsed.port or 3306,
+        user=parsed.username,
+        password=parsed.password,
+        database=parsed.path.lstrip("/")  # remove leading slash
+    )
 
 def get_schools(query):
     try:
         # Establish a connection to the MySQL database
-        connection = mysql.connector.connect(
-            host=os.getenv("DB_HOST", "localhost"),
-            database=os.getenv("DB_NAME", "schools"),
-            user=os.getenv("DB_USER", "root"),
-            password=os.getenv("DB_PASSWORD")
-
-        )
+        connection = get_mysql_connection_from_url()
 
         if connection.is_connected():
             cursor = connection.cursor(dictionary=True)  # Use dictionary for easier access

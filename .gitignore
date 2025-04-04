@@ -4,6 +4,7 @@ client/node_modules/
 client/build/
 client/.next/
 client/.cache/
+client/.env
 client/package-lock.json
 
 # Python (Flask backend)

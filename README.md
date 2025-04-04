@@ -85,6 +85,11 @@ MAIL_USERNAME=your_email@gmail.com
 MAIL_PASSWORD=your_email_app_password
 
 GOOGLE_API_KEY=your_google_maps_api_key
+
+
+*To run this project locally or in deployment, the frontend expects:
+
+REACT_APP_API_URL=https://your-backend-url.com*
 ```
 
 ## Hosting Notes
