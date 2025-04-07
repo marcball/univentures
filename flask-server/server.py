@@ -24,6 +24,12 @@ app = Flask(__name__)
 
 def get_mysql_connection_from_url():
     db_url = os.getenv("MYSQL_URL")
+    if not db_url:
+        raise ValueError("MYSQL_URL is not set in the environment")
+    
+    if isinstance(db_url, bytes):
+        db_url = db_url.decode("utf-8")
+
     parsed = urlparse(db_url)
 
     return mysql.connector.connect(
@@ -460,34 +466,30 @@ def insert_school_data(name, domain):
     
 @app.route('/api/supersecretfunction', methods=['GET'])
 def purge_and_refill():
-
     provided_key = request.args.get('key') or request.headers.get('X-Admin-Key')
     expected_key = os.getenv("ADMIN_SECRET_KEY")
 
     if provided_key != expected_key:
         return jsonify({"error": "Unauthorized access"}), 403
-    
-    #get api data
+
     url = "http://universities.hipolabs.com/search?country=united%20states"
+    
     try:
-        response = requests.get(url, timeout=20, stream=True)
+        response = requests.get(url, timeout=20)
         response.raise_for_status()
         data = response.json()
-    except requests.exceptions.RequestException as e:
-        print(f"[ERROR] Network request failed: {e}")
-        return jsonify({"error": "University data fetch failed"}), 500
     except Exception as e:
-        print(f"[ERROR] Failed to decode JSON: {e}")
         return jsonify({"error": "University data decode failed"}), 500
-    #iterate data
+
     for uni in data:
-        name = uni["name"]
-        domain = uni["domains"][0]
-        insert_school_data(name, domain)
+        try:
+            name = uni["name"]
+            domain = uni["domains"][0]
+            insert_school_data(name, domain)
+        except Exception as e:
+            print(f"ailed to insert {uni.get('name', '?')}: {e}")
 
     return jsonify({"message": "Data fetched and stored successfully!"})
-
-
 
 #FILL your names table with LATITUDE and LONGITUDE!
 # This function uses OpenStreetMap

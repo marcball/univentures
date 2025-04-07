@@ -37,6 +37,25 @@ const SearchBar = () => {
         checkLoginStatus();
     }, []);
 
+    useEffect(() => {
+        const delayDebounce = setTimeout(() => {
+            if (query.length > 1) { // Automatically searches once 2+ characters typed
+                axios
+                    .get(`${process.env.REACT_APP_API_URL}/api/schools?query=${encodeURIComponent(query)}`)
+                    .then((response) => {
+                        setSchools(response.data);
+                    })
+                    .catch((error) => {
+                        console.error('Error fetching schools:', error);
+                    });
+            } else {
+                setSchools([]);
+            }
+        }, 300); // 300ms delay
+    
+        return () => clearTimeout(delayDebounce);
+    }, [query]);
+    
     const handleSearch = async (e) => {
         e.preventDefault();
         try {
