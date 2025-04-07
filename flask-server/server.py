@@ -470,13 +470,15 @@ def purge_and_refill():
     #get api data
     url = "http://universities.hipolabs.com/search?country=united%20states"
     try:
-        response = requests.get(url, timeout=20)
+        response = requests.get(url, timeout=20, stream=True)
         response.raise_for_status()
         data = response.json()
-    except Exception as e:
-        print(f"Failed to fetch university data: {e}")
+    except requests.exceptions.RequestException as e:
+        print(f"[ERROR] Network request failed: {e}")
         return jsonify({"error": "University data fetch failed"}), 500
-
+    except Exception as e:
+        print(f"[ERROR] Failed to decode JSON: {e}")
+        return jsonify({"error": "University data decode failed"}), 500
     #iterate data
     for uni in data:
         name = uni["name"]
