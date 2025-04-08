@@ -26,13 +26,13 @@ function Account() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const loginResponse = await axios.get('/api/auth/check-login');
+        const loginResponse = await axios.get('https://univentures.up.railway.app/api/auth/check-login');
 
         if (loginResponse.data.isLoggedIn) {
           setIsLoggedIn(true);
 
           // Fetch account information
-          const accountResponse = await axios.get('/api/account');
+          const accountResponse = await axios.get('https://univentures.up.railway.app/api/account');
           const accountData = accountResponse.data;
           setUserInfo(accountData);
           setFirstName(accountData.firstName);
@@ -55,7 +55,7 @@ function Account() {
   // Fetch reviews based on user_id
   const fetchReviews = async (userId) => {
     try {
-      const response = await axios.get(`/api/reviews/user?user_id=${userId}`);
+      const response = await axios.get(`https://univentures.up.railway.app/api/reviews/user?user_id=${userId}`);
       setReviews(response.data);
       console.log(response.data);
     } catch (error) {
@@ -101,7 +101,7 @@ function Account() {
   //LOGOUT BUTTON
   const handleLogout = async () => {
     try {
-      const response = await axios.post('/api/auth/logout');
+      const response = await axios.post('https://univentures.up.railway.app/api/auth/logout');
       if (response.status === 200) {
         window.location.href = '/'
       }
@@ -118,7 +118,7 @@ function Account() {
     }
 
     try {
-      const response = await axios.post('/api/account', {
+      const response = await axios.post('https://univentures.up.railway.app/api/account', {
         firstName, lastName
       });
 
@@ -146,7 +146,7 @@ function Account() {
   const handleDeleteReview = async (reviewId) => {
     try {
       
-      const response = await fetch(`/api/reviews/${reviewId}`, {
+      const response = await fetch(`https://univentures.up.railway.app/api/reviews/${reviewId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -170,7 +170,7 @@ function Account() {
   //DELETE ACCOUNT
   const handleDeleteAccount = async () => {
     try {
-      const response = await fetch('/api/auth/delete_account', {
+      const response = await fetch('https://univentures.up.railway.app/api/auth/delete_account', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
