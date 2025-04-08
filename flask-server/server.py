@@ -37,7 +37,7 @@ def get_mysql_connection_from_url():
         port=parsed.port or 3306,
         user=parsed.username,
         password=parsed.password,
-        database=parsed.path.lstrip("/")  # remove leading slash
+        database="railway"
     )
 
 # Session & Cookie Configuration
@@ -742,7 +742,7 @@ def add_review():
     if not (school_id and location_id and review_text and user_id):
         return jsonify({'error': 'Missing data'}), 400
 
-    connection = get_db_connection()
+    connection = get_db_connection_schools()
     if connection:
         try:
             cursor = connection.cursor()
@@ -771,7 +771,7 @@ def get_reviews():
     if not (school_id and location_id):
         return jsonify({'error': 'Missing query parameters'}), 400
 
-    connection = get_db_connection()
+    connection = get_db_connection_schools()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -799,7 +799,7 @@ def get_reviews_by_user():
         return jsonify({'error': 'Missing user_id parameter'}), 400
 
     # Connect to the database
-    connection = get_db_connection()
+    connection = get_db_connection_users()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -832,7 +832,7 @@ def get_reviews_by_user():
 @app.route('/api/reviews/<int:review_id>', methods=['DELETE'])
 def delete_review(review_id):
     # Connect to the database
-    connection = get_db_connection()
+    connection = get_db_connection_schools()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -876,7 +876,7 @@ def rate_activity():
         return jsonify({"error": "Location ID and rating are required"}), 400
 
     try:
-        connection = get_db_connection()
+        connection = get_db_connection_schools()
         cursor = connection.cursor(dictionary=True)
 
         # Insert or update user rating
