@@ -46,7 +46,7 @@ def get_mysql_connection_from_url():
 app.secret_key = os.getenv("SECRET_KEY")
 app.config['SESSION_COOKIE_SECURE'] = True  # just for local development, ONCE USING HTTPS SHOULD BE True
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(days=14)  # sets cookie life span
-app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'  # just for local development, ONCE USING HTTPS SHOULD BE 'None'
+app.config['SESSION_COOKIE_SAMESITE'] = 'None'  # just for local development, ONCE USING HTTPS SHOULD BE 'None'
 
 # Email Configuration
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
