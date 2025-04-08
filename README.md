@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-Visit the deployed site: COMING SOON
+Visit the deployed site: [UniVentures](https://https://univentures.vercel.app/)
 
 ## Features
 
@@ -98,7 +98,9 @@ This project can be deployed using any combination of static frontend hosting (s
 
 ## Project Info
 
-This was a final project developed for a Missouri State Software Engineering course in collaboration with two other team members. Their names have been omitted here for anonymity.
+This was a final project developed for a Missouri State Software Engineering course in collaboration with three other team members. Their names have been omitted here for anonymity. 
+
+I have continued development on this project by extending its functionality and transitioning it from a local development environment to a live deployment using Vercel and Railway.
 
 ## License
 

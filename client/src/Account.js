@@ -26,13 +26,13 @@ function Account() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const loginResponse = await axios.get('https://univentures.up.railway.app/api/auth/check-login');
+        const loginResponse = await axios.get('https://univentures.up.railway.app/api/auth/check-login', { withCredentials: true });
 
         if (loginResponse.data.isLoggedIn) {
           setIsLoggedIn(true);
 
           // Fetch account information
-          const accountResponse = await axios.get('https://univentures.up.railway.app/api/account');
+          const accountResponse = await axios.get('https://univentures.up.railway.app/api/account', { withCredentials: true });
           const accountData = accountResponse.data;
           setUserInfo(accountData);
           setFirstName(accountData.firstName);
@@ -55,7 +55,7 @@ function Account() {
   // Fetch reviews based on user_id
   const fetchReviews = async (userId) => {
     try {
-      const response = await axios.get(`https://univentures.up.railway.app/api/reviews/user?user_id=${userId}`);
+      const response = await axios.get(`https://univentures.up.railway.app/api/reviews/user?user_id=${userId}`, { withCredentials: true });
       setReviews(response.data);
       console.log(response.data);
     } catch (error) {
@@ -101,7 +101,7 @@ function Account() {
   //LOGOUT BUTTON
   const handleLogout = async () => {
     try {
-      const response = await axios.post('https://univentures.up.railway.app/api/auth/logout');
+      const response = await axios.post('https://univentures.up.railway.app/api/auth/logout', { withCredentials: true });
       if (response.status === 200) {
         window.location.href = '/'
       }
@@ -120,7 +120,8 @@ function Account() {
     try {
       const response = await axios.post('https://univentures.up.railway.app/api/account', {
         firstName, lastName
-      });
+      },
+      { withCredentials: true });
 
       if (response.status === 200) {
         userInfo.firstName = firstName;   //set original database vars to new database vars
@@ -148,6 +149,7 @@ function Account() {
       
       const response = await fetch(`https://univentures.up.railway.app/api/reviews/${reviewId}`, {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -172,6 +174,7 @@ function Account() {
     try {
       const response = await fetch('https://univentures.up.railway.app/api/auth/delete_account', {
         method: 'DELETE',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
