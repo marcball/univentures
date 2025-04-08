@@ -60,16 +60,11 @@ serializer = URLSafeTimedSerializer(os.getenv("SERIALIZER_SECRET")) #should be i
 
 
 # Database connection utilities
-def get_db_connection_users():
-    if 'db_connection_users' not in g:
-        g.db_connection_users = get_mysql_connection_from_url()
-    return g.db_connection_users
+def get_db_connection():
+    if 'db_connection' not in g:
+        g.db_connection = get_mysql_connection_from_url()
+    return g.db_connection
 
-# Connection to SCHOOLS database
-def get_db_connection_schools():
-    if 'db_connection_schools' not in g:
-        g.db_connection_schools = get_mysql_connection_from_url()
-    return g.db_connection_schools
 
 # Close Connection - USERS
 @app.teardown_appcontext
@@ -109,7 +104,7 @@ def login():
     password = data.get('password')
 
     # GET DATABASE CONNECTION
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)                 # Makes the row return as a dictionary!
 
     #CHECK INPUT WITH DATABASE
@@ -155,7 +150,7 @@ def signup():
     password = data.get('password')
     
     # CONNECT TO DATABASE
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
     try:
@@ -229,7 +224,7 @@ def get_account_info():
         return jsonify({"message": "User not logged in"}), 401
     
     user_id = session['user_id']
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)
     
     try:
@@ -264,7 +259,7 @@ def update_account_info():
         return jsonify({"message": "First and last name are required"}), 400
 
     # Connect to the database
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor()
 
     try:
@@ -300,7 +295,7 @@ def verify_email(token):
         return jsonify({"message": "The verification link is invalid or has expired."}), 400
 
     # Mark the user as verified
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
     try:
@@ -325,7 +320,7 @@ def delete_account():
     password = data.get('password')
 
     # GET DATABASE CONNECTION
-    db = get_db_connection_users()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
     try:
@@ -380,7 +375,7 @@ def search_schools():
 # Get school details by ID
 @app.route('/api/schools/<int:school_id>', methods=['GET'])
 def get_school_by_id(school_id):
-    db = get_db_connection_schools()
+    db = get_db_connection()
     
     cursor = db.cursor(dictionary=True)
 
@@ -404,7 +399,7 @@ def get_school_by_id(school_id):
 # fetch locations from database
 @app.route('/api/school/<int:school_id>/locations', methods=['GET'])
 def get_school_locations(school_id):
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)
 
     # Get query parameters (if any)
@@ -433,7 +428,7 @@ def get_school_locations(school_id):
 # GET SCHOOL BY DOMAIN - for signup route
 @app.route('/api/schools/<string:domain>', methods=['GET'])
 def get_school_by_domain(domain):
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor()
     try:
         cursor.execute("SELECT id, school_name FROM names WHERE domain = %s", (domain,))
@@ -457,7 +452,7 @@ def get_school_by_domain(domain):
 # http://universities.hipolabs.com/ API
 # filtered to United States
 def insert_school_data(name, domain):
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor()
     query = "INSERT INTO names (school_name, domain) VALUES (%s, %s)"
     cursor.execute(query, (name, domain))
@@ -522,7 +517,7 @@ def get_coordinates(university_name):
     
 @app.route('/api/fill-locations', methods=['GET'])
 def update_database():
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor()
     cursor.execute("SELECT id, school_name FROM names WHERE latitude IS NULL OR longitude IS NULL")
     universities = cursor.fetchall()
@@ -545,7 +540,7 @@ def update_database():
 @app.route('/api/adventure', methods=['POST'])
 def add_adventure():
      # Connect to the database
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor()
 
     try:
@@ -584,7 +579,7 @@ def add_adventure():
 @app.route('/api/random-location', methods=['GET'])
 def get_random_location():
     # Connect to the database
-    db = get_db_connection_schools()
+    db = get_db_connection()
     cursor = db.cursor(dictionary=True)  # Use dictionary=True for easy JSON serialization
 
     try:
@@ -742,7 +737,7 @@ def add_review():
     if not (school_id and location_id and review_text and user_id):
         return jsonify({'error': 'Missing data'}), 400
 
-    connection = get_db_connection_schools()
+    connection = get_db_connection()
     if connection:
         try:
             cursor = connection.cursor()
@@ -771,7 +766,7 @@ def get_reviews():
     if not (school_id and location_id):
         return jsonify({'error': 'Missing query parameters'}), 400
 
-    connection = get_db_connection_schools()
+    connection = get_db_connection()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -799,7 +794,7 @@ def get_reviews_by_user():
         return jsonify({'error': 'Missing user_id parameter'}), 400
 
     # Connect to the database
-    connection = get_db_connection_users()
+    connection = get_db_connection()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -832,7 +827,7 @@ def get_reviews_by_user():
 @app.route('/api/reviews/<int:review_id>', methods=['DELETE'])
 def delete_review(review_id):
     # Connect to the database
-    connection = get_db_connection_schools()
+    connection = get_db_connection()
     if connection:
         try:
             cursor = connection.cursor(dictionary=True)
@@ -876,7 +871,7 @@ def rate_activity():
         return jsonify({"error": "Location ID and rating are required"}), 400
 
     try:
-        connection = get_db_connection_schools()
+        connection = get_db_connection()
         cursor = connection.cursor(dictionary=True)
 
         # Insert or update user rating
