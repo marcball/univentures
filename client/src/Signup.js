@@ -84,7 +84,7 @@ function Signup() {
 
 
 
-    const url = '/api/auth/signup';
+    const url = 'https://univentures.up.railway.app/api/auth/signup';
 
     // BUTTON PRESSED
     try {

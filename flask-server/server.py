@@ -21,6 +21,7 @@ import os
 
 load_dotenv()
 app = Flask(__name__)
+
 CORS(app, supports_credentials=True, origins=["https://univentures.vercel.app"])
 
 def get_mysql_connection_from_url():
@@ -171,7 +172,7 @@ def signup():
             response = get_school_by_domain(domain)
             print(response)
             
-            
+                        
             #school is found
             if isinstance(response, tuple):
                 status_code = response[1]
