@@ -34,10 +34,11 @@ function Login() {
   // ACCOUNT LOGIN
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = 'https://univentures.up.railway.app/api/auth/login';
+
     // BUTTON PRESSED
     try {
-      const response = await axios.post(url, { email, password }, { withCredentials: true }); // BACKEND REQUEST
+      const response = await axios.post('https://univentures.up.railway.app/api/auth/login', { email, password }, { withCredentials: true }); // BACKEND REQUEST
+      
       if (response.status === 200) {
         window.location.href = '/account';
       }
