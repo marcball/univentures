@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/auth/check-login', {
+        const response = await axios.get('https://univentures.vercel.app/api/auth/check-login', {
           withCredentials: true,
         });
         if (response.data.isLoggedIn) {

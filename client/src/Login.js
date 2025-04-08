@@ -16,7 +16,7 @@ function Login() {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/auth/check-login', {
+        const response = await axios.get('https://univentures.up.railway.app//api/auth/check-login', {
           withCredentials: true, // cookie with request
         });
         if (response.data.isLoggedIn) { // COOKIE EXISTS
@@ -34,7 +34,7 @@ function Login() {
   // ACCOUNT LOGIN
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const url = 'http://localhost:5000/api/auth/login';
+    const url = 'https://univentures.up.railway.app//api/auth/login';
     // BUTTON PRESSED
     try {
       const response = await axios.post(url, { email, password }, { withCredentials: true }); // BACKEND REQUEST

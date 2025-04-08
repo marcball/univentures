@@ -21,6 +21,7 @@ import os
 
 load_dotenv()
 app = Flask(__name__)
+CORS(app, supports_credentials=True, origins=["https://univentures.vercel.app"])
 
 def get_mysql_connection_from_url():
     db_url = os.getenv("MYSQL_URL")

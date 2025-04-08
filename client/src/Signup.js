@@ -19,7 +19,7 @@ function Signup() {
     const checkLoginStatus = async () => {
       try {
 
-        const response = await axios.get('http://localhost:5000/api/auth/check-login', {
+        const response = await axios.get('https://univentures.up.railway.app/api/auth/check-login', {
           withCredentials: true //cookie with request
         });
 
