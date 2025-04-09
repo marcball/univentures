@@ -18,7 +18,11 @@ function MainPage() {
     useEffect(() => {
         const checkLogin = async () => {
             try {
-                const loginResponse = await axios.get('/api/auth/check-login');
+                const loginResponse = await axios.get(
+                    'https://univentures.up.railway.app/api/auth/check-login',
+                    { withCredentials: true }
+                  );
+                  
                 if (loginResponse.data.isLoggedIn) {
                     setIsLoggedIn(true);
                 }

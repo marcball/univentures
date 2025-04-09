@@ -30,7 +30,9 @@ const SchoolDetail = () => {
 		// Fetch user account data
 		const fetchUserData = async () => {
 			try {
-				const response = await axios.get('https://univentures.up.railway.app/api/account');
+				const response = await axios.get('https://univentures.up.railway.app/api/account',
+                    { withCredentials: true }
+                );
 				setUserId(response.data.id);
 				setUserSchoolId(response.data.schoolId);
 			} catch (error) {
@@ -182,7 +184,9 @@ const SchoolDetail = () => {
 	useEffect(() => {
 		const fetchSchoolDetails = async () => {
 			try {
-				const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/schools/${schoolID}`);
+				const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/schools/${schoolID}`,
+                    { withCredentials: true }
+                );
 
 				setSchool(response.data);
 

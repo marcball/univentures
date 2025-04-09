@@ -14,11 +14,13 @@ const SearchBar = () => {
     useEffect(() => {
         const checkLoginStatus = async () => {
             try {
-                const response = await axios.get('/api/auth/check-login');
+                const response = await axios.get('https://univentures.up.railway.app/api/auth/check-login',
+                    { withCredentials: true }
+                );
                 if (response.data.isLoggedIn) {
                     setIsLoggedIn(true);
 
-                    const response = await axios.get('/api/account', { withCredentials: true });
+                    const response = await axios.get('https://univentures.up.railway.app/api/account', { withCredentials: true });
                     const userInfo = response.data;
                     if (userInfo && userInfo.schoolId) {
                         setSchoolId(userInfo.schoolId);
@@ -72,7 +74,10 @@ const SearchBar = () => {
 
     const handleMySchoolClick = async () => {
         try {
-            const response = await axios.get('/api/account', { withCredentials: true });
+            const response = await axios.get(
+                `${process.env.REACT_APP_API_URL}/api/account`,
+                { withCredentials: true }
+              );            
             const userInfo = response.data;
             if (userInfo && userInfo.schoolId) {
                 navigate(`/school/${userInfo.schoolId}`);
