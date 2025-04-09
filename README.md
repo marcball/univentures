@@ -31,18 +31,25 @@ Visit the deployed site: [UniVentures](https://https://univentures.vercel.app/)
 
 ## Screenshots
 
-*WORK IN PROGRESS*
 
-Homepage (University Search):  
-![Homepage](./screenshots/homepage.png)
+### Homepage  
+Search by university to begin exploring campus adventures.  
+![Homepage](./screenshots/homepage2.png)
 
-Adventure Listing and Filters:  
-![Adventures](./screenshots/adventures.png)
+### Create an Account  
+Sign up using your `.edu` email to join your university's community.  
 
-Submit an Adventure:  
-![Submit](./screenshots/submit.png)
+### Account Dashboard  
+View your personal information, school affiliation, and all reviews you've submitted.  
+![Your Account](./screenshots/your_account.png)
 
-+ a few more.
+### Example Adventure  
+A user-submitted community adventure titled **"Abandoned Graffiti Tunnels"**, featuring a custom photo, title, description, address, star rating input, and a full list of user reviews.  
+![Example Adventure](./screenshots/example_adventure.png)
+
+### University Page  
+View adventures and filters specific to your selected school. Toggle between public (Google Places) and community-submitted adventures with type and rating filters.
+![University Page](./screenshots/university_page.png)
 
 ## Tech Stack
 
