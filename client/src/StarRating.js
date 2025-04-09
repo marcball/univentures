@@ -26,7 +26,7 @@ const StarRating = ({ locationId, currentRating, onRatingUpdate }) => {
             // Now make the rating request with the user_id
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rate`, {
                 method: 'POST',
-                credentials: 'include'
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
                 },
