@@ -38,6 +38,7 @@ Search by university to begin exploring campus adventures.
 
 ### Create an Account  
 Sign up using your `.edu` email to join your university's community.  
+![Create Account](./screenshots/create_account.png)
 
 ### Account Dashboard  
 View your personal information, school affiliation, and all reviews you've submitted.  
