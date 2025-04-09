@@ -30,7 +30,7 @@ const SchoolDetail = () => {
 		// Fetch user account data
 		const fetchUserData = async () => {
 			try {
-				const response = await axios.get('/api/account');
+				const response = await axios.get('https://univentures.up.railway.app/api/account');
 				setUserId(response.data.id);
 				setUserSchoolId(response.data.schoolId);
 			} catch (error) {
@@ -212,8 +212,9 @@ const SchoolDetail = () => {
 		}
 
 		try {
-			const response = await fetch('/api/adventure', {
+			const response = await fetch('https://univentures.up.railway.app/api/adventure', {
 				method: 'POST',
+                credentials: 'include',
 				headers: {
 					'Content-Type': 'application/json',
 				},

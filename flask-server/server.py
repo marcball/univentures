@@ -542,6 +542,8 @@ def update_database():
 #Route to add adventures to the database
 @app.route('/api/adventure', methods=['POST'])
 def add_adventure():
+
+
      # Connect to the database
     db = get_db_connection()
     cursor = db.cursor()
