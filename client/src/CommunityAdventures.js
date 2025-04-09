@@ -14,8 +14,10 @@ const CommunityAdventures = ({ schoolID, filters }) => {
     const fetchLocations = async () => {
       try {
         const queryString = new URLSearchParams(filters).toString();
-        const url = `/api/school/${schoolID}/locations${queryString ? '?' + queryString : ''}`;
-        const response = await fetch(url);
+        const url = `${process.env.REACT_APP_API_URL}/api/school/${schoolID}/locations${queryString ? '?' + queryString : ''}`;
+        const response = await fetch(url, {
+            credentials: 'include'
+        });
 
         if (!response.ok) {
           throw new Error('Failed to fetch locations');
@@ -50,7 +52,11 @@ const CommunityAdventures = ({ schoolID, filters }) => {
 
   const handleSurprise = async () => {
     try {
-      const response = await fetch(`/api/random-location?school_id=${encodeURIComponent(schoolID)}`);
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/random-location?school_id=${encodeURIComponent(schoolID)}`, {
+        credentials: 'include'
+      });
+      
+    
       if (!response.ok) {
         throw new Error("Failed to fetch a random location");
       }
