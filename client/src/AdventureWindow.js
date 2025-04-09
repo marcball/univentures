@@ -29,7 +29,13 @@ const ActivityModal = ({ activity, onClose }) => {
 
     const fetchReviews = async () => {
         try {
-            const response = await fetch(`/api/reviews?school_id=${activity.school_id}&location_id=${activity.id}`);
+            const response = await fetch(
+                `${process.env.REACT_APP_API_URL}/api/reviews?school_id=${activity.school_id}&location_id=${activity.id}`,
+                {
+                  credentials: 'include',
+                }
+              );
+              
             const data = await response.json();
             setReviews(data);
         } catch (error) {
