@@ -11,7 +11,7 @@ const StarRating = ({ locationId, currentRating, onRatingUpdate }) => {
         try {
 
             // Fetch the user info first
-            const userInfoResponse = await fetch('/api/auth/user-info');
+            const userInfoResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/user-info`);
             const userInfo = await userInfoResponse.json();
             const user_id = userInfo.user_id;  // Get user ID directly from the response
 
@@ -22,7 +22,7 @@ const StarRating = ({ locationId, currentRating, onRatingUpdate }) => {
             }
 
             // Now make the rating request with the user_id
-            const response = await fetch('/api/rate', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/rate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
