@@ -39,12 +39,16 @@ const ActivityModal = ({ activity, onClose }) => {
 
     const checkLoginStatus = async () => {
         try {
-            const response = await fetch('/api/auth/check-login');
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/check-login`, {
+                credentials: 'include'
+            });
             const data = await response.json();
 
             if (data.isLoggedIn) {
                 setIsLoggedIn(true);
-                const userInfoResponse = await fetch('/api/auth/user-info'); 
+                const userInfoResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/auth/user-info`, {
+                credentials: 'include'
+                });
                 const userInfo = await userInfoResponse.json();
                 setUserId(userInfo.user_id); 
             } else {
@@ -77,10 +81,11 @@ const ActivityModal = ({ activity, onClose }) => {
         }
 
         try {
-            const response = await fetch('/api/reviews', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/api/reviews`, {
                 method: 'POST',
+                credentials: 'include', // cookie
                 headers: {
-                    'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     school_id: activity.school_id,
