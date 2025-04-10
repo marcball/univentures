@@ -33,24 +33,31 @@ Visit the deployed site: [UniVentures](https://https://univentures.vercel.app/)
 
 
 ### Homepage  
-Search by university to begin exploring campus adventures.  
+Searched "Missouri" in the search bar, bringing up schools that begin with that name.
 ![Homepage](./screenshots/homepage.png)
+*Caption: Screenshot showing the homepage with the search results for universities starting with "Missouri."*
+
 
 ### Create an Account  
 Sign up using your `.edu` email to join your university's community.  
 ![Create Account](./screenshots/create_account.png)
+*Caption: Screenshot of the account creation page, displaying an error message when a non-**.edu** email address is entered.*
 
 ### Account Dashboard  
 View your personal information, school affiliation, and all reviews you've submitted.  
 ![Your Account](./screenshots/your_account.png)
+*Caption: Screenshot of the account dashboard, showing user information, university, reviews, and account options.*
+
 
 ### Example Adventure  
-A user-submitted community adventure titled **"Abandoned Graffiti Tunnels"**, featuring a custom photo, title, description, address, star rating input, and a full list of user reviews.  
+A user-submitted community adventure titled **"Abandoned Graffiti Tunnels"**, featuring a custom photo, description, location, a 1-5 star rating, and user reviews.  
 ![Example Adventure](./screenshots/example_adventure.png)
+*Caption: Screenshot of a user-submitted adventure titled "Abandoned Graffiti Tunnels," with a photo, description, rating system, and user reviews.*
 
 ### University Page  
-View adventures and filters specific to your selected school. Toggle between public (Google Places) and community-submitted adventures with type and rating filters.
+View public and community-submitted adventures with filters by rating and type.
 ![University Page](./screenshots/university_page2.png)
+*Caption: Screenshot of the university page, showing public adventures fetched from Google Places API with filter options.*
 
 ## Tech Stack
 
