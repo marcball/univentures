@@ -34,7 +34,7 @@ Visit the deployed site: [UniVentures](https://https://univentures.vercel.app/)
 
 ### Homepage  
 Search by university to begin exploring campus adventures.  
-![Homepage](./screenshots/homepage2.png)
+![Homepage](./screenshots/homepage.png)
 
 ### Create an Account  
 Sign up using your `.edu` email to join your university's community.  
@@ -50,7 +50,7 @@ A user-submitted community adventure titled **"Abandoned Graffiti Tunnels"**, fe
 
 ### University Page  
 View adventures and filters specific to your selected school. Toggle between public (Google Places) and community-submitted adventures with type and rating filters.
-![University Page](./screenshots/university_page.png)
+![University Page](./screenshots/university_page2.png)
 
 ## Tech Stack
 
