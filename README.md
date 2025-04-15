@@ -4,7 +4,7 @@
 
 ## Live Demo
 
-Visit the deployed site: [UniVentures](https://https://univentures.vercel.app/)
+Visit the deployed site: [UniVentures](https://univentures.vercel.app/)
 
 ## Features
 
