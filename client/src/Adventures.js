@@ -97,8 +97,26 @@ const Adventures = () => {
           </div>
         ))
       ) : (
-        <p className="text-center text-gray-500">No adventures found nearby.</p>
-      )}
+
+<p className="text-center text-gray-500">
+  No adventures found nearby. Google Maps API key has been disabled.
+  <br />
+  Here's an example of how this section would look when adventures are available:
+  <br />
+  <a
+    href="/university_page.png"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="inline-block mt-4"
+  >
+    <img
+      href="/university_page.png"
+      alt="Example adventures page screenshot"
+      className="mx-auto w-full max-w-md rounded shadow"
+    />
+  </a>
+</p>  
+        )}
 
       {selectedAdventure && (
         <AdventureModal activity={selectedAdventure} onClose={closeModal} />
