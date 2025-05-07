@@ -110,7 +110,7 @@ const Adventures = () => {
     className="inline-block mt-4"
   >
     <img
-      href="/university_page.png"
+      src="/university_page.png"
       alt="Example adventures page screenshot"
       className="mx-auto w-full max-w-md rounded shadow"
     />
